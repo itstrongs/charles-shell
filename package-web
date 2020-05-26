@@ -5,10 +5,10 @@ git pull
 mvn clean package -DskipTests=true
 service mysqld start
 
-cd /root/git/charles-web/charles-eden/target
+cd /root/git/charles-web/charles-bamboo-lodge/target
 rm -f nohup.out
 
-RESOURCE_NAME=charles-eden-1.0-SNAPSHOT.jar
+RESOURCE_NAME=charles-bamboo-lodge-1.0-SNAPSHOT.jar
 
 tpid=`ps -ef|grep $RESOURCE_NAME|grep -v grep|grep -v kill|awk '{print $2}'`
 if [ ${tpid} ]; then
