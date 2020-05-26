@@ -1,0 +1,1 @@
+jarsigner -verbose -keystore /Users/charles/Developer/Mac/shell/tools/jdangame.jks -storepass jdangame -signedjar $1 -digestalg SHA1 -sigalg MD5withRSA $1 jdangame
