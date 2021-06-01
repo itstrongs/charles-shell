@@ -1,0 +1,11 @@
+#!/bin/sh
+
+cd /Users/charles/Developer/Repositories/charles-blog
+
+git add .
+
+git commit -m "add blog"
+
+git push
+
+sshpass -p Lfq@1781 ssh root@121.41.74.211 "package-blog"

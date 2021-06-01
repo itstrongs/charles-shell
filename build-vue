@@ -1,0 +1,17 @@
+#!/bin/sh
+
+dir_project="/root/mojito/mojito-vue"
+
+cd $dir_project
+git pull
+cnpm run build
+
+if docker ps -a | grep -q mojito-vue;
+then
+	docker stop mojito-vue
+	docker rm mojito-vue
+	docker rmi mojito-vue
+fi
+
+docker build -t mojito-vue .
+docker run --name mojito-vue -d -p 80:80 mojito-vue
