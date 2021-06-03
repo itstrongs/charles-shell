@@ -1,10 +1,28 @@
 #!/bin/sh
 
-dir_project="/root/mojito-base/mojito-note"
+root_dir="/root/mojito-base/mojito-note"
 
-if [ ! -d $dir_project ]; then
-    mkdir -p $dir_project
-    echo -e "\033[32m this is $dir_project success ! \033[0m"
-    cd $dir_project
-    git clone
+#if [ ! -d $dir_project ]; then
+#    mkdir -p $dir_project
+#    echo -e "\033[32m this is $dir_project success ! \033[0m"
+#    cd $dir_project
+#    git clone
+#fi
+
+cd $root_dir
+git pull
+mvn clean package -DskipTests=true
+
+#cd ${root_dir}/target
+#mv -f mojito-note-1.0-SNAPSHOT.jar ${root_dir}/docker
+
+if docker ps -a | grep -q mojito-note;
+then
+  docker stop mojito-note
+  docker rm mojito-note
+  docker rmi mojito-note
 fi
+
+#cd ${root_dir}/mojito-note/docker
+docker build -t mojito-note .
+docker run --name mojito-note -d -p 8086:8086 mojito-note
